@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+<!--
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License. See accompanying LICENSE file.
+-->
+
+<!-- Put site-specific property overrides in this file. -->
+
+<configuration>
+    <property>
+        <name>mapreduce.framework.name</name>
+        <value>yarn</value>
+    </property>
+    <!-- https://hadoop.apache.org/docs/r3.1.2/hadoop-yarn/hadoop-yarn-site/ResourceModel.html -->
+    <!-- The amount of memory a container needs to run MR Application Master -->
+    <property>
+        <name>yarn.app.mapreduce.am.resource.memory-mb</name>
+        <value>512</value>
+    </property>
+    <!-- Upper memory limit that Hadoop allows to be allocated to a
+    mapper container, in megabytes. The default is 1024 -->
+    <property>
+        <name>mapreduce.map.resource.memory-mb</name>
+        <value>512</value>
+    </property>
+    <!-- Upper memory limit that Hadoop allows to be allocated to a
+    reducer container, in megabytes. The default is 1024 -->
+    <property>
+        <name>mapreduce.reduce.resource.memory-mb</name>
+        <value>2048</value>
+    </property>
+</configuration>

@@ -1,0 +1,70 @@
+version: "3"
+
+services:
+  master:
+    build: master
+    hostname: master
+    healthcheck:
+      test: [ "CMD-SHELL", "curl -f http://localhost:9870/ || exit 1" ]
+    ports:
+      - "9000:9000"
+      - "9870:9870"
+    volumes:
+      - namenode:/dfs/name
+    networks:
+      sparknet:
+        ipv4_address: 172.28.1.1
+    extra_hosts:
+      - "worker1:172.28.1.2"
+      - "worker2:172.28.1.3"
+      - "metastore:172.28.1.4"
+
+  worker1:
+    build: worker
+    hostname: worker1
+    depends_on:
+      - master
+    healthcheck:
+      test: [ "CMD-SHELL", "curl -f http://localhost:9864/ || exit 1" ]
+    ports:
+      - "9864:9864"
+    volumes:
+      - datanode1:/dfs/data
+    networks:
+      sparknet:
+        ipv4_address: 172.28.1.2
+    extra_hosts:
+      - "master:172.28.1.1"
+      - "worker2:172.28.1.3"
+      - "hivemetastore:172.28.1.4"
+
+  worker2:
+    build: worker
+    hostname: worker2
+    depends_on:
+      - master
+    healthcheck:
+      test: [ "CMD-SHELL", "curl -f http://localhost:9864/ || exit 1" ]
+    ports:
+      - "9865:9864"
+    volumes:
+      - datanode2:/dfs/data
+    networks:
+      sparknet:
+        ipv4_address: 172.28.1.3
+    extra_hosts:
+      - "master:172.28.1.1"
+      - "worker1:172.28.1.2"
+      - "hivemetastore:172.28.1.4"
+
+volumes:
+  namenode:
+  datanode1:
+  datanode2:
+
+networks:
+  sparknet:
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.28.0.0/16
