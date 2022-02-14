@@ -10,8 +10,8 @@ RUN sed -i.bak -e "s/http:\/\/archive\.ubuntu\.com/http:\/\/jp\.archive\.ubuntu\
 
 ENV JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/
 
-RUN curl -O https://dist.apache.org/repos/dist/release/hadoop/common/KEYS  \
- && gpg --import KEYS
+RUN curl -fSL https://dist.apache.org/repos/dist/release/hadoop/common/KEYS -o /tmp/KEYS  \
+ && gpg --import /tmp/KEYS
 
 ENV HADOOP_VERSION=3.2.2
 ENV HADOOP_URL=https://www.apache.org/dist/hadoop/common/hadoop-$HADOOP_VERSION/hadoop-$HADOOP_VERSION.tar.gz
@@ -28,7 +28,6 @@ RUN set -x \
 
 ENV HADOOP_CONF_DIR=$HADOOP_HOME/etc/hadoop
 ENV PATH=$HADOOP_HOME/sbin:$HADOOP_HOME/bin:$PATH
-#ENV MULTIHOMED_NETWORK=1
 ENV USER=root
 
 COPY conf/core-site.xml "${HADOOP_CONF_DIR}/"

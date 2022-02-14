@@ -2,7 +2,7 @@ version: "3"
 
 services:
   master:
-    build: master
+    image: hadoop-hive-spark-master
     hostname: master
     healthcheck:
       test: [ "CMD-SHELL", "curl -f http://localhost:9870/ || exit 1" ]
@@ -20,7 +20,7 @@ services:
       - "metastore:172.28.1.4"
 
   worker1:
-    build: worker
+    image: hadoop-hive-spark-worker
     hostname: worker1
     depends_on:
       - master
@@ -36,10 +36,10 @@ services:
     extra_hosts:
       - "master:172.28.1.1"
       - "worker2:172.28.1.3"
-      - "hivemetastore:172.28.1.4"
+      - "metastore:172.28.1.4"
 
   worker2:
-    build: worker
+    image: hadoop-hive-spark-worker
     hostname: worker2
     depends_on:
       - master
@@ -55,7 +55,7 @@ services:
     extra_hosts:
       - "master:172.28.1.1"
       - "worker1:172.28.1.2"
-      - "hivemetastore:172.28.1.4"
+      - "metastore:172.28.1.4"
 
 volumes:
   namenode:
