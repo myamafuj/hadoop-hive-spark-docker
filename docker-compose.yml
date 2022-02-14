@@ -4,6 +4,8 @@ services:
   master:
     image: hadoop-hive-spark-master
     hostname: master
+    depends_on:
+      - metastore
     healthcheck:
       test: [ "CMD-SHELL", "curl -f http://localhost:9870 || exit 1" ]
     ports:
@@ -11,6 +13,7 @@ services:
       - "9000:9000"
       - "9868:9868"
       - "9870:9870"
+      - "10000:10000"
       - "19888:19888"
     volumes:
       - namenode:/dfs/name
@@ -62,10 +65,31 @@ services:
       - "worker1:172.28.1.2"
       - "metastore:172.28.1.4"
 
+  metastore:
+    image: postgres:11
+    hostname: metastore
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+    environment:
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - metastore:/var/lib/postgresql/data
+      - ./ddl/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      sparknet:
+        ipv4_address: 172.28.1.4
+    extra_hosts:
+      - "master:172.28.1.1"
+      - "worker1:172.28.1.2"
+      - "worker2:172.28.1.3"
+
 volumes:
   namenode:
   datanode1:
   datanode2:
+  metastore:
 
 networks:
   sparknet:
