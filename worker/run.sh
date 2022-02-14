@@ -1,4 +1,7 @@
 #!/bin/bash
 
 echo "Starting Hadoop data node..."
-hdfs datanode
+hdfs --daemon start datanode
+
+echo "Starting Hadoop node manager..."
+yarn nodemanager
