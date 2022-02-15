@@ -37,20 +37,24 @@
         <value>postgres</value>
     </property>
     <property>
-        <name>hive.server2.enable.doAs</name>
+        <name>hive.metastore.schema.verification</name>
         <value>false</value>
-        <description>
-            Setting this property to true will have HiveServer2 execute
-            Hive operations as the user making the calls to it.
-        </description>
     </property>
+<!--    <property>-->
+<!--        <name>hive.server2.enable.doAs</name>-->
+<!--        <value>false</value>-->
+<!--        <description>-->
+<!--            Setting this property to true will have HiveServer2 execute-->
+<!--            Hive operations as the user making the calls to it.-->
+<!--        </description>-->
+<!--    </property>-->
     <!--    https://cwiki.apache.org/confluence/display/Hive/Hive+on+Spark%3A+Getting+Started -->
-    <property>
-        <name>hive.execution.engine</name>
-        <value>spark</value>
-    </property>
-    <property>
-        <name>spark.yarn.jars</name>
-        <value>hdfs://master:9000/spark/jars/*</value>
-    </property>
+<!--    <property>-->
+<!--        <name>hive.execution.engine</name>-->
+<!--        <value>spark</value>-->
+<!--    </property>-->
+<!--    <property>-->
+<!--        <name>spark.yarn.jars</name>-->
+<!--        <value>hdfs://master:9000/spark/jars/*</value>-->
+<!--    </property>-->
 </configuration>
