@@ -19,15 +19,15 @@
 <configuration>
     <property>
         <name>fs.defaultFS</name>
-        <value>hdfs://master:9000</value>
+        <value>hdfs://master</value>
     </property>
     <!--To be able to run Hive via JDBC as root-->
     <property>
-        <name>hadoop.proxyuser.root.groups</name>
+        <name>hadoop.proxyuser.spark.groups</name>
         <value>*</value>
     </property>
     <property>
-        <name>hadoop.proxyuser.root.hosts</name>
+        <name>hadoop.proxyuser.spark.hosts</name>
         <value>*</value>
     </property>
 </configuration>

@@ -30,6 +30,11 @@ hive --service metastore &
 echo "Starting Hive server2..."
 hiveserver2 &
 
+if ! hdfs dfs -test -d /tmp
+then
+  echo "Formatting directory: /tmp"
+  hdfs dfs -mkdir -p  /tmp
+fi
 if ! hdfs dfs -test -d "$SPARK_LOGS_HDFS_PATH"
 then
   echo "Formatting directory: $SPARK_LOGS_HDFS_PATH"

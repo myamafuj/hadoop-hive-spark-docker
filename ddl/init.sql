@@ -1,1 +1,3 @@
 CREATE DATABASE "metastore";
+CREATE USER spark WITH ENCRYPTED PASSWORD 'spark';
+GRANT ALL ON DATABASE metastore TO spark;
