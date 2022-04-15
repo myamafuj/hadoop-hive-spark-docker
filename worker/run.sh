@@ -7,4 +7,4 @@ echo "Starting Hadoop node manager..."
 yarn --daemon start nodemanager
 
 echo "Starting Spark slave node..."
-spark-class "org.apache.spark.deploy.worker.Worker" "${SPARK_MASTER_ADDRESS}"
+spark-class org.apache.spark.deploy.worker.Worker "spark://master:7077"

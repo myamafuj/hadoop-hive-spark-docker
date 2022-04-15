@@ -12,10 +12,6 @@ ENV SPARK_PUBLIC_DNS=localhost
 ENV SPARK_LOGS_HDFS_PATH=/var/log/spark
 ENV SPARK_JARS_HDFS_PATH=/spark/jars
 
-RUN sudo pip install pandas openpyxl jupyter
-#RUN pip install -e $SPARK_HOME/python
-RUN sudo pip install findspark
-
 COPY run.sh /usr/local/sbin/run.sh
 RUN sudo chmod a+x /usr/local/sbin/run.sh
 CMD ["run.sh"]
