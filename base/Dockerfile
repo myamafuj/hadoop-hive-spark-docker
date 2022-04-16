@@ -30,8 +30,8 @@ USER $USERNAME
 ENV JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/
 
 # Hadoop
-ENV HADOOP_VERSION=3.3.2
-ENV HADOOP_URL=https://www.apache.org/dist/hadoop/common/hadoop-$HADOOP_VERSION/hadoop-$HADOOP_VERSION.tar.gz
+ARG HADOOP_VERSION=3.3.2
+ARG HADOOP_URL=https://www.apache.org/dist/hadoop/common/hadoop-$HADOOP_VERSION/hadoop-$HADOOP_VERSION.tar.gz
 ENV HADOOP_HOME=/opt/hadoop
 
 RUN set -x \
@@ -51,8 +51,8 @@ ENV PATH=$HADOOP_HOME/sbin:$HADOOP_HOME/bin:$PATH
 ENV LD_LIBRARY_PATH=$HADOOP_HOME/lib/native:$LD_LIBRARY_PATH
 
 # Spark
-ENV SPARK_VERSION=3.2.1
-ENV SPARK_URL=https://archive.apache.org/dist/spark/spark-$SPARK_VERSION/spark-$SPARK_VERSION-bin-hadoop3.2.tgz
+ARG SPARK_VERSION=3.2.1
+ARG SPARK_URL=https://archive.apache.org/dist/spark/spark-$SPARK_VERSION/spark-$SPARK_VERSION-bin-hadoop3.2.tgz
 ENV SPARK_HOME=/opt/spark
 
 RUN set -x \
@@ -73,8 +73,8 @@ ENV SPARK_CONF_DIR=$SPARK_HOME/conf
 ENV PATH=$SPARK_HOME/sbin:$SPARK_HOME/bin:$PATH
 
 # Hive
-ENV HIVE_VERSION=3.1.2
-ENV HIVE_URL=https://archive.apache.org/dist/hive/hive-$HIVE_VERSION/apache-hive-$HIVE_VERSION-bin.tar.gz
+ARG HIVE_VERSION=3.1.3
+ARG HIVE_URL=https://archive.apache.org/dist/hive/hive-$HIVE_VERSION/apache-hive-$HIVE_VERSION-bin.tar.gz
 ENV HIVE_HOME=/opt/hive
 
 RUN set -x \
@@ -88,8 +88,8 @@ RUN set -x \
  && tar -xvf /tmp/hive.tar.gz -C $HIVE_HOME --strip-components 1 \
  && rm /tmp/hive*
 
-RUN sudo rm $HIVE_HOME/lib/guava-*.jar \
- && sudo cp $HADOOP_HOME/share/hadoop/hdfs/lib/guava-*.jar $HIVE_HOME/lib/
+#RUN sudo rm $HIVE_HOME/lib/guava-*.jar \
+# && sudo cp $HADOOP_HOME/share/hadoop/hdfs/lib/guava-*.jar $HIVE_HOME/lib/
 #RUN mv /opt/hive/lib/log4j-slf4j-impl-2.6.2.jar /opt/hive/lib/log4j-slf4j-impl-2.6.2.jar.bak
 
 ENV HIVE_CONF_DIR=$HIVE_HOME/conf
