@@ -96,14 +96,14 @@ ENV HIVE_CONF_DIR=$HIVE_HOME/conf
 ENV PATH=$HIVE_HOME/sbin:$HIVE_HOME/bin:$PATH
 
 # Config
-COPY conf/core-site.xml $HADOOP_CONF_DIR/
-COPY conf/hdfs-site.xml $HADOOP_CONF_DIR/
-COPY conf/yarn-site.xml $HADOOP_CONF_DIR/
-COPY conf/mapred-site.xml $HADOOP_CONF_DIR/
-COPY conf/workers $HADOOP_CONF_DIR/
-COPY conf/spark-defaults.conf $SPARK_CONF_DIR/
-COPY conf/log4j.properties $SPARK_CONF_DIR/
-COPY conf/hive-site.xml $HIVE_CONF_DIR/
+COPY --chown=$USERNAME:$GROUPNAME conf/core-site.xml $HADOOP_CONF_DIR/
+COPY --chown=$USERNAME:$GROUPNAME conf/hdfs-site.xml $HADOOP_CONF_DIR/
+COPY --chown=$USERNAME:$GROUPNAME conf/yarn-site.xml $HADOOP_CONF_DIR/
+COPY --chown=$USERNAME:$GROUPNAME conf/mapred-site.xml $HADOOP_CONF_DIR/
+COPY --chown=$USERNAME:$GROUPNAME conf/workers $HADOOP_CONF_DIR/
+COPY --chown=$USERNAME:$GROUPNAME conf/spark-defaults.conf $SPARK_CONF_DIR/
+COPY --chown=$USERNAME:$GROUPNAME conf/log4j.properties $SPARK_CONF_DIR/
+COPY --chown=$USERNAME:$GROUPNAME conf/hive-site.xml $HIVE_CONF_DIR/
 
 RUN ln $HADOOP_CONF_DIR/workers $SPARK_CONF_DIR/ \
  && ln $HIVE_CONF_DIR/hive-site.xml $SPARK_CONF_DIR/
