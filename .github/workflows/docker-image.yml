@@ -13,14 +13,20 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
-    - name: Build the base image
-      run: docker build ./base --file Dockerfile --tag hadoop-hive-spark-base:$(date +%s)
-    - name: Build the master image
-      run: docker build ./master --file Dockerfile --tag hadoop-hive-spark-master:$(date +%s)
-    - name: Build the worker image
-      run: docker build ./worker --file Dockerfile --tag hadoop-hive-spark-worker:$(date +%s)
-    - name: Build the history image
-      run: docker build ./history --file Dockerfile --tag hadoop-hive-spark-history:$(date +%s)
-    - name: Build the jupyter image
-      run: docker build ./jupyter --file Dockerfile --tag hadoop-hive-spark-jupyter:$(date +%s)
+      - name: checkout
+      - uses: actions/checkout@v3
+
+      - name: Build the base image
+        run: docker build ./base --file Dockerfile --tag hadoop-hive-spark-base:$(date +%s)
+
+      - name: Build the master image
+        run: docker build ./master --file Dockerfile --tag hadoop-hive-spark-master:$(date +%s)
+
+      - name: Build the worker image
+        run: docker build ./worker --file Dockerfile --tag hadoop-hive-spark-worker:$(date +%s)
+
+      - name: Build the history image
+        run: docker build ./history --file Dockerfile --tag hadoop-hive-spark-history:$(date +%s)
+
+      - name: Build the jupyter image
+        run: docker build ./jupyter --file Dockerfile --tag hadoop-hive-spark-jupyter:$(date +%s)
