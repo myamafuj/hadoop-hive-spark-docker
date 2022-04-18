@@ -17,16 +17,16 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Build the base image
-        run: docker build --file ./base/Dockerfile --tag hadoop-hive-spark-base:$(date +%s)
+        run: docker build ./base --tag hadoop-hive-spark-base:$(date +%s)
 
       - name: Build the master image
-        run: docker build --file ./master/Dockerfile --tag hadoop-hive-spark-master:$(date +%s)
+        run: docker build ./master --tag hadoop-hive-spark-master:$(date +%s)
 
       - name: Build the worker image
-        run: docker build --file ./worker/Dockerfile --tag hadoop-hive-spark-worker:$(date +%s)
+        run: docker build ./worker --tag hadoop-hive-spark-worker:$(date +%s)
 
       - name: Build the history image
-        run: docker build --file ./history/Dockerfile --tag hadoop-hive-spark-history:$(date +%s)
+        run: docker build ./history --tag hadoop-hive-spark-history:$(date +%s)
 
       - name: Build the jupyter image
-        run: docker build --file ./jupyter/Dockerfile --tag hadoop-hive-spark-jupyter:$(date +%s)
+        run: docker build ./jupyter --tag hadoop-hive-spark-jupyter:$(date +%s)
