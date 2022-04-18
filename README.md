@@ -9,10 +9,6 @@
 * [Spark 3.2.1](https://spark.apache.org/)
 
 ## Quick Start
-To build docker image, run:
-```
-  make
-```
 
 To deploy the cluster, run:
 ```
