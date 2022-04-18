@@ -14,7 +14,7 @@ jobs:
 
     steps:
       - name: checkout
-      - uses: actions/checkout@v3
+        uses: actions/checkout@v3
 
       - name: Build the base image
         run: docker build ./base --file Dockerfile --tag hadoop-hive-spark-base:$(date +%s)
