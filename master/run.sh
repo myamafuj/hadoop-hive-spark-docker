@@ -8,8 +8,8 @@ fi
 echo "Starting Hadoop name node..."
 hdfs --daemon start namenode
 
-echo "Starting Hadoop secondary name node..."
-hdfs --daemon start secondarynamenode
+#echo "Starting Hadoop secondary name node..."
+#hdfs --daemon start secondarynamenode
 
 echo "Starting Hadoop resource manager..."
 yarn --daemon start resourcemanager
@@ -45,4 +45,4 @@ then
 fi
 
 echo "Starting Spark master node..."
-spark-class org.apache.spark.deploy.master.Master --ip $SPARK_MASTER_HOST
+spark-class org.apache.spark.deploy.master.Master --ip "$SPARK_MASTER_HOST"
