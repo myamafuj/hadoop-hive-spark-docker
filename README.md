@@ -27,8 +27,6 @@ ResourceManager: http://localhost:8088
 
 NameNode: http://localhost:9870
 
-SecondaryNameNode: http://localhost:9868
-
 HistoryServer: http://localhost:19888
 
 Datanode1: http://localhost:9864
