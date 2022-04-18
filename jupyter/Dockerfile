@@ -1,4 +1,4 @@
-FROM hadoop-hive-spark-base
+FROM mtakamot/hadoop-hive-spark-base
 
 RUN sudo pip install pyarrow pandas openpyxl jupyter findspark
 
