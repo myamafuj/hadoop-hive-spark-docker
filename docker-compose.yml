@@ -38,7 +38,6 @@ services:
       - "10000:10000"
     volumes:
       - namenode:/opt/hadoop/dfs/name
-      - namesecondary:/opt/hadoop/dfs/namesecondary
     restart: always
     networks:
       sparknet:
