@@ -1,8 +1,8 @@
 FROM ubuntu:latest
 
 RUN sed -i -e "s|http://archive.ubuntu.com|http://jp.archive.ubuntu.com|g" /etc/apt/sources.list \
- && apt -qq update  \
- && DEBIAN_FRONTEND=noninteractive apt -qq install -y --no-install-recommends \
+ && apt-get -qq update  \
+ && DEBIAN_FRONTEND=noninteractive apt-get install -qq --no-install-recommends \
       sudo \
       openjdk-8-jdk \
       curl \
@@ -65,7 +65,7 @@ RUN set -x \
  && gpg --verify /tmp/spark.tgz.asc \
  && tar -xf /tmp/spark.tgz -C $SPARK_HOME --strip-components 1 \
  && rm /tmp/spark* \
- && curl -fSL https://jdbc.postgresql.org/download/postgresql-42.3.2.jar -o $SPARK_HOME/jars/postgresql-42.3.2.jar
+ && curl -fsSL https://jdbc.postgresql.org/download/postgresql-42.3.2.jar -o $SPARK_HOME/jars/postgresql-42.3.2.jar
 
 ENV PYTHONHASHSEED=1
 ENV PYSPARK_PYTHON=python3
