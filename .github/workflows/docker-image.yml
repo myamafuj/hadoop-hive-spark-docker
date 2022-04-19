@@ -25,4 +25,4 @@ jobs:
         with:
           context: ./${{ matrix.target }}
           push: false
-          tags: mtakamot/${{ matrix.target }}:$(date +%s)
+          tags: mtakamot/${{ matrix.target }}
