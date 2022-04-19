@@ -2,7 +2,7 @@ FROM ubuntu:latest
 
 RUN sed -i -e "s|http://archive.ubuntu.com|http://jp.archive.ubuntu.com|g" /etc/apt/sources.list \
  && apt -qq update  \
- && DEBIAN_FRONTEND=noninteractive apt install -qq -y --no-install-recommends \
+ && DEBIAN_FRONTEND=noninteractive apt -qq install -y --no-install-recommends \
       sudo \
       openjdk-8-jdk \
       curl \
