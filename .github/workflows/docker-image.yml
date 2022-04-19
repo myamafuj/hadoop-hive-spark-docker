@@ -12,21 +12,17 @@ jobs:
 
     runs-on: ubuntu-latest
 
+    strategy:
+      matrix:
+        target: [ "base", "master", "worker", "history", "jupyter" ]
+
     steps:
       - name: checkout
         uses: actions/checkout@v3
 
-      - name: Build the base image
-        run: docker build ./base --tag mtakamot/hadoop-hive-spark-base:$(date +%s)
-
-      - name: Build the master image
-        run: docker build ./master --tag mtakamot/hadoop-hive-spark-master:$(date +%s)
-
-      - name: Build the worker image
-        run: docker build ./worker --tag mtakamot/hadoop-hive-spark-worker:$(date +%s)
-
-      - name: Build the history image
-        run: docker build ./history --tag mtakamot/hadoop-hive-spark-history:$(date +%s)
-
-      - name: Build the jupyter image
-        run: docker build ./jupyter --tag mtakamot/hadoop-hive-spark-jupyter:$(date +%s)
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v2
+        with:
+          context: ./${{ matrix.target }}
+          push: false
+          tags: mtakamot/${{ matrix.target }}:$(date +%s)
