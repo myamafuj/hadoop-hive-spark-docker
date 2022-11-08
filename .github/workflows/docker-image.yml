@@ -21,35 +21,35 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Build and push base image
-        uses: docker/build-push-action@v3
+        uses: docker/build-push-action@v2
         with:
           context: ./base
           push: true
           tags: myamafuj/hadoop-hive-spark-base:latest
 
       - name: Build and push master image
-        uses: docker/build-push-action@v3
+        uses: docker/build-push-action@v2
         with:
           context: ./master
           push: true
           tags: myamafuj/hadoop-hive-spark-master:latest
 
       - name: Build and push worker image
-        uses: docker/build-push-action@v3
+        uses: docker/build-push-action@v2
         with:
           context: ./worker
           push: true
           tags: myamafuj/hadoop-hive-spark-worker:latest
 
       - name: Build and push history image
-        uses: docker/build-push-action@v3
+        uses: docker/build-push-action@v2
         with:
           context: ./history
           push: true
           tags: myamafuj/hadoop-hive-spark-history:latest
 
       - name: Build and push jupyter image
-        uses: docker/build-push-action@v3
+        uses: docker/build-push-action@v2
         with:
           context: ./jupyter
           push: true
