@@ -11,37 +11,17 @@ jobs:
       - name: checkout
         uses: actions/checkout@v3
 
-      - name: Build and push base image
-        uses: docker/build-push-action@v2
-        with:
-          context: ./base
-          push: false
-          tags: myamafuj/hadoop-hive-spark-base:latest
+      - name: Build the base image
+        run: docker build ./base --tag hadoop-hive-spark-base
 
-      - name: Build and push master image
-        uses: docker/build-push-action@v2
-        with:
-          context: ./master
-          push: false
-          tags: myamafuj/hadoop-hive-spark-master:latest
+      - name: Build the master image
+        run: docker build ./master --tag hadoop-hive-spark-master --pull=false
 
-      - name: Build and push worker image
-        uses: docker/build-push-action@v2
-        with:
-          context: ./worker
-          push: false
-          tags: myamafuj/hadoop-hive-spark-worker:latest
+      - name: Build the worker image
+        run: docker build ./worker --tag hadoop-hive-spark-worker --pull=false
 
-      - name: Build and push history image
-        uses: docker/build-push-action@v2
-        with:
-          context: ./history
-          push: false
-          tags: myamafuj/hadoop-hive-spark-history:latest
+      - name: Build the history image
+        run: docker build ./history --tag hadoop-hive-spark-history --pull=false
 
-      - name: Build and push jupyter image
-        uses: docker/build-push-action@v2
-        with:
-          context: ./jupyter
-          push: false
-          tags: myamafuj/hadoop-hive-spark-jupyter:latest
+      - name: Build the jupyter image
+        run: docker build ./jupyter --tag hadoop-hive-spark-jupyter --pull=false
