@@ -3,7 +3,7 @@ services:
     image: postgres:11
     hostname: metastore
     environment:
-      POSTGRES_PASSWORD: spark
+      POSTGRES_PASSWORD: jupyter
     ports:
       - "5432:5432"
     volumes:
