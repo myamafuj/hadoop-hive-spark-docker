@@ -1,4 +1,4 @@
-FROM mtakamot/hadoop-hive-spark-base
+FROM myamafuj/hadoop-hive-spark-base
 
 ENV NAMEDIR=/opt/hadoop/dfs/name
 RUN mkdir -p /opt/hadoop/dfs/name
