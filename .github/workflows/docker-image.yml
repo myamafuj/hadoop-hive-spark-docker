@@ -10,10 +10,6 @@ jobs:
 
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        target: [ "base", "master", "worker", "history", "jupyter" ]
-
     steps:
       - name: checkout
         uses: actions/checkout@v3
@@ -25,9 +21,30 @@ jobs:
           push: false
           tags: myamafuj/hadoop-hive-spark-base
 
-      - name: Build and push app image
+      - name: Build and push master image
         uses: docker/build-push-action@v2
         with:
-          context: ./${{ matrix.target }}
+          context: ./master
           push: false
-          tags: myamafuj/hadoop-hive-spark-${{ matrix.target }}
+          tags: myamafuj/hadoop-hive-spark-master
+
+      - name: Build and push worker image
+        uses: docker/build-push-action@v2
+        with:
+          context: ./worker
+          push: false
+          tags: myamafuj/hadoop-hive-spark-worker
+
+      - name: Build and push history image
+        uses: docker/build-push-action@v2
+        with:
+          context: ./history
+          push: false
+          tags: myamafuj/hadoop-hive-spark-history
+
+      - name: Build and push jupyter image
+        uses: docker/build-push-action@v2
+        with:
+          context: ./jupyter
+          push: false
+          tags: myamafuj/hadoop-hive-spark-jupyter
