@@ -1,4 +1,4 @@
-FROM myamafuj/hadoop-hive-spark-base
+FROM hadoop-hive-spark-base
 
 ENV DATADIR=/opt/hadoop/dfs/data
 RUN mkdir -p /opt/hadoop/dfs/data
