@@ -1,8 +1,6 @@
 name: Docker Image CI
 
 on:
-  push:
-    branches: [ develop ]
   pull_request:
     branches: [ master ]
 
@@ -25,4 +23,4 @@ jobs:
         with:
           context: ./${{ matrix.target }}
           push: false
-          tags: mtakamot/${{ matrix.target }}
+          tags: myamafuj/${{ matrix.target }}
