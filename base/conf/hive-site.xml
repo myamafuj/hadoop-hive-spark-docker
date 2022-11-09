@@ -30,11 +30,11 @@
     </property>
     <property>
         <name>javax.jdo.option.ConnectionUserName</name>
-        <value>spark</value>
+        <value>jupyter</value>
     </property>
     <property>
         <name>javax.jdo.option.ConnectionPassword</name>
-        <value>spark</value>
+        <value>jupyter</value>
     </property>
     <property>
         <name>hive.metastore.schema.verification</name>

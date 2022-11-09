@@ -1,3 +1,3 @@
 CREATE DATABASE "metastore";
-CREATE USER spark WITH ENCRYPTED PASSWORD 'spark';
-GRANT ALL ON DATABASE metastore TO spark;
+CREATE USER jupyter WITH ENCRYPTED PASSWORD 'jupyter';
+GRANT ALL ON DATABASE metastore TO jupyter;

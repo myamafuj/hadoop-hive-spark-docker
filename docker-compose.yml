@@ -3,7 +3,7 @@ services:
     image: postgres:11
     hostname: metastore
     environment:
-      POSTGRES_PASSWORD: spark
+      POSTGRES_PASSWORD: jupyter
     ports:
       - "5432:5432"
     volumes:
@@ -21,7 +21,7 @@ services:
       - "jupyter:172.28.1.6"
 
   master:
-    image: mtakamot/hadoop-hive-spark-master
+    image: hadoop-hive-spark-master
     hostname: master
     depends_on:
       - metastore
@@ -50,7 +50,7 @@ services:
       - "jupyter:172.28.1.6"
 
   worker1:
-    image: mtakamot/hadoop-hive-spark-worker
+    image: hadoop-hive-spark-worker
     hostname: worker1
     depends_on:
       - master
@@ -76,7 +76,7 @@ services:
       - "jupyter:172.28.1.6"
 
   worker2:
-    image: mtakamot/hadoop-hive-spark-worker
+    image: hadoop-hive-spark-worker
     hostname: worker2
     depends_on:
       - master
@@ -102,7 +102,7 @@ services:
       - "jupyter:172.28.1.6"
 
   history:
-    image: mtakamot/hadoop-hive-spark-history
+    image: hadoop-hive-spark-history
     hostname: history
     depends_on:
       - master
@@ -127,7 +127,7 @@ services:
       - "jupyter:172.28.1.6"
 
   jupyter:
-    image: mtakamot/hadoop-hive-spark-jupyter
+    image: hadoop-hive-spark-jupyter
     hostname: jupyter
     environment:
       SPARK_MASTER_HOST: 172.28.1.2
