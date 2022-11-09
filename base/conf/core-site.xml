@@ -23,11 +23,11 @@
     </property>
     <!--To be able to run Hive via JDBC as root-->
     <property>
-        <name>hadoop.proxyuser.spark.groups</name>
+        <name>hadoop.proxyuser.jupyter.groups</name>
         <value>*</value>
     </property>
     <property>
-        <name>hadoop.proxyuser.spark.hosts</name>
+        <name>hadoop.proxyuser.jupyter.hosts</name>
         <value>*</value>
     </property>
 </configuration>
