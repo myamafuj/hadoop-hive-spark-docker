@@ -4,9 +4,7 @@ RUN sudo pip install -U pip &&\
     sudo pip install --no-cache-dir \
     pandas \
     openpyxl \
-    jupyter \
-    findspark
-
-COPY run.sh /usr/local/sbin/run.sh
-RUN sudo chmod a+x /usr/local/sbin/run.sh
-CMD ["run.sh"]
+    findspark \
+    tensorflow \
+    tensorflow-io \
+    tensorflow-serving-api
