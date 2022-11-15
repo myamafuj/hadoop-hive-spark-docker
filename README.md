@@ -12,7 +12,8 @@
 
 To deploy the cluster, run:
 ```
-  docker-compose up
+make
+docker-compose up
 ```
 
 ## Access interfaces with the following URL
