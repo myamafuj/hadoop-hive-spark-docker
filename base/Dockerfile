@@ -30,7 +30,7 @@ USER $USERNAME
 ENV JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/
 
 # Hadoop
-ARG HADOOP_VERSION=3.3.4
+ARG HADOOP_VERSION=3.3.6
 ARG HADOOP_URL=https://www.apache.org/dist/hadoop/common/hadoop-$HADOOP_VERSION/hadoop-$HADOOP_VERSION.tar.gz
 ENV HADOOP_HOME=/opt/hadoop
 
@@ -51,7 +51,8 @@ ENV PATH=$HADOOP_HOME/sbin:$HADOOP_HOME/bin:$PATH
 ENV LD_LIBRARY_PATH=$HADOOP_HOME/lib/native:$LD_LIBRARY_PATH
 
 # Spark
-ARG SPARK_VERSION=3.3.1
+ARG SPARK_VERSION=3.5.0
+ARG POSTGRE_VERSION=42.7.1
 ARG SPARK_URL=https://archive.apache.org/dist/spark/spark-$SPARK_VERSION/spark-$SPARK_VERSION-bin-hadoop3.tgz
 ENV SPARK_HOME=/opt/spark
 
@@ -65,7 +66,7 @@ RUN set -x \
  && gpg --verify /tmp/spark.tgz.asc \
  && tar -xf /tmp/spark.tgz -C $SPARK_HOME --strip-components 1 \
  && rm /tmp/spark* \
- && curl -fsSL https://jdbc.postgresql.org/download/postgresql-42.3.2.jar -o $SPARK_HOME/jars/postgresql-42.3.2.jar
+ && curl -fsSL https://jdbc.postgresql.org/download/postgresql-$POSTGRE_VERSION.jar -o $SPARK_HOME/jars/postgresql-$POSTGRE_VERSION.jar
 
 ENV PYTHONHASHSEED=1
 ENV PYSPARK_PYTHON=python3
