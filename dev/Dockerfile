@@ -1,7 +1,8 @@
 FROM hadoop-hive-spark-base AS base
-FROM tensorflow/tensorflow:latest-gpu
+# FROM tensorflow/tensorflow:latest-gpu
+FROM linaro/tensorflow-arm64-build:latest-multipython
 
-RUN sed -i -e "s|http://archive.ubuntu.com|http://jp.archive.ubuntu.com|g" /etc/apt/sources.list \
+RUN sed -i -e "s|http://archive.ubuntu.com|http://ca.archive.ubuntu.com|g" /etc/apt/sources.list \
  && apt-get -qq update  \
  && DEBIAN_FRONTEND=noninteractive apt-get -qq install --no-install-recommends \
       sudo \
@@ -13,8 +14,8 @@ RUN sed -i -e "s|http://archive.ubuntu.com|http://jp.archive.ubuntu.com|g" /etc/
 
 ARG USERNAME=jupyter
 ARG GROUPNAME=jupyter
-ARG UID=1001
-ARG GID=1001
+ARG UID=1002
+ARG GID=1002
 
 RUN echo $USERNAME ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/$USERNAME \
  && chmod 0440 /etc/sudoers.d/$USERNAME \
@@ -23,7 +24,7 @@ RUN echo $USERNAME ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/$USERNAME \
 
 USER $USERNAME
 
-ENV JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/
+ENV JAVA_HOME=/usr/lib/jvm/java-8-openjdk-arm64/
 
 # Hadoop
 COPY --from=base --chown=$USERNAME:$GROUPNAME /opt/hadoop /opt/hadoop
@@ -50,7 +51,16 @@ RUN sudo pip install -U pip &&\
     sudo pip install --no-cache-dir \
     pandas \
     openpyxl \
-    findspark \
-    tensorflow-serving-api
+    findspark 
+    # tensorflow-serving-api
+    
+# Install miniconda
+ENV CONDA_DIR=/opt/conda
+RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-aarch64.sh -O /tmp/miniconda.sh && \
+    sudo /bin/bash /tmp/miniconda.sh -b -p $CONDA_DIR
+
+# Put conda in path so we can use conda activate
+ENV PATH=$CONDA_DIR/bin:$PATH
 
 WORKDIR /home/$USERNAME
+# CMD [ "tail", "-f", "/dev/null" ]
