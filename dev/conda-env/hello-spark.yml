@@ -1,0 +1,13 @@
+name: hello-spark
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.11
+  - ipython
+  - numpy
+  - numpy-base
+  - pandas
+  - py4j
+  - pyspark
+  - pytz

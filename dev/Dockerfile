@@ -62,5 +62,11 @@ RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-aar
 # Put conda in path so we can use conda activate
 ENV PATH=$CONDA_DIR/bin:$PATH
 
+# Config
+# COPY --chown=$USERNAME:$GROUPNAME conda-dev/hello-spark.yml /home/$USERNAME/conda-dev
+# COPY --chown=$USERNAME:$GROUPNAME data/* /home/$USERNAME/data
+# RUN conda env create -f /home/$USERNAME/conda-dev/hello-spark.yml \
+#     && conda activate hello-spark
+
 WORKDIR /home/$USERNAME
 # CMD [ "tail", "-f", "/dev/null" ]
