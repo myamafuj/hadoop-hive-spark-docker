@@ -1,13 +1,14 @@
 services:
   metastore:
     image: postgres:11
+    container_name: hadoop_postgres
     hostname: metastore
     environment:
       POSTGRES_PASSWORD: jupyter
     ports:
       - "5432:5432"
     volumes:
-      - metastore:/var/lib/postgresql/data
+      - ~/Documents/Docker-Volumns/hadoop/metastore:/var/lib/postgresql/data
       - ./ddl/init.sql:/docker-entrypoint-initdb.d/init.sql
     restart: always
     networks:
@@ -21,6 +22,7 @@ services:
 
   master:
     image: hadoop-hive-spark-master
+    container_name: hadoop_master
     hostname: master
     depends_on:
       - metastore
@@ -36,7 +38,7 @@ services:
       - "9870:9870"
       - "10000:10000"
     volumes:
-      - namenode:/opt/hadoop/dfs/name
+      - ~/Documents/Docker-Volumns/hadoop/namenode:/opt/hadoop/dfs/name
     restart: always
     networks:
       sparknet:
@@ -49,6 +51,7 @@ services:
 
   worker1:
     image: hadoop-hive-spark-worker
+    container_name: hadoop_worker1
     hostname: worker1
     depends_on:
       - master
@@ -61,7 +64,7 @@ services:
       - "8081:8081"
       - "9864:9864"
     volumes:
-      - datanode1:/opt/hadoop/dfs/data
+      - ~/Documents/Docker-Volumns/hadoop/datanode1:/opt/hadoop/dfs/data
     restart: always
     networks:
       sparknet:
@@ -74,6 +77,7 @@ services:
 
   worker2:
     image: hadoop-hive-spark-worker
+    container_name: hadoop_worker2
     hostname: worker2
     depends_on:
       - master
@@ -86,7 +90,7 @@ services:
       - "8082:8081"
       - "9865:9864"
     volumes:
-      - datanode2:/opt/hadoop/dfs/data
+      - ~/Documents/Docker-Volumns/hadoop/datanode2:/opt/hadoop/dfs/data
     restart: always
     networks:
       sparknet:
@@ -99,6 +103,7 @@ services:
 
   history:
     image: hadoop-hive-spark-history
+    container_name: hadoop_history
     hostname: history
     depends_on:
       - master
@@ -154,6 +159,7 @@ services:
 
   dev:
     image: hadoop-hive-spark-dev
+    container_name: hadoop_dev
     hostname: dev
     tty: true
     environment:
@@ -161,7 +167,7 @@ services:
       SPARK_LOCAL_IP: 172.28.0.7
       SPARK_LOCAL_HOSTNAME: dev
     volumes:
-      - ~/Documents/Docker-Volumns/hadoop-dev:/home/
+      - ~/Documents/Docker-Volumns/hadoop/hadoop-dev:/home/
     networks:
       sparknet:
         ipv4_address: 172.28.0.7
@@ -171,12 +177,12 @@ services:
     #       devices:
     #         - capabilities: [gpu]
 
-volumes:
-  namenode:
-  namesecondary:
-  datanode1:
-  datanode2:
-  metastore:
+# volumes:
+#   namenode: 
+#   namesecondary:
+#   datanode1:
+#   datanode2:
+#   metastore:
 
 networks:
   sparknet:

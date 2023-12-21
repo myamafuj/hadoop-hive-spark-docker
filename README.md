@@ -26,11 +26,25 @@ docker network create --driver=bridge \
 ```
 
 ```sh
+# attach container to network(sparknet)
 docker network connect sparknet container
 ```
 
 ```sh
+# create conda env from file
 conda create --name MySpark python=3.11
 # or
 conda env create --file ~/conda-env/hello-spark.yml
+```
+
+```sh
+# create the mysql container and attach it to sparknet
+docker run --name mysql -dit \
+    --network sparknet \
+    -p 3306:3306 \
+    -e MYSQL_ROOT_PASSWORD=root \
+    -v ~/Documents/Docker-Volumns/mysql:/var/lib/mysql \
+    mysql:latest
+
+docker exec -it mysql mysql -p
 ```
