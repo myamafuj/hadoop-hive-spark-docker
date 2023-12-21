@@ -25,3 +25,12 @@ docker network create --driver=bridge \
     sparknet
 ```
 
+```sh
+docker network connect sparknet container
+```
+
+```sh
+conda create --name MySpark python=3.11
+# or
+conda env create --file ~/conda-env/hello-spark.yml
+```

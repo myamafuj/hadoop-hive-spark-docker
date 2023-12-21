@@ -1,6 +1,5 @@
 FROM hadoop-hive-spark-base AS base
-# FROM tensorflow/tensorflow:latest-gpu
-FROM linaro/tensorflow-arm64-build:latest-multipython
+FROM tensorflow/tensorflow
 
 RUN sed -i -e "s|http://archive.ubuntu.com|http://ca.archive.ubuntu.com|g" /etc/apt/sources.list \
  && apt-get -qq update  \
@@ -14,8 +13,8 @@ RUN sed -i -e "s|http://archive.ubuntu.com|http://ca.archive.ubuntu.com|g" /etc/
 
 ARG USERNAME=jupyter
 ARG GROUPNAME=jupyter
-ARG UID=1002
-ARG GID=1002
+ARG UID=1001
+ARG GID=1001
 
 RUN echo $USERNAME ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/$USERNAME \
  && chmod 0440 /etc/sudoers.d/$USERNAME \
@@ -51,22 +50,25 @@ RUN sudo pip install -U pip &&\
     sudo pip install --no-cache-dir \
     pandas \
     openpyxl \
-    findspark 
-    # tensorflow-serving-api
+    findspark \
+    tensorflow-serving-api
     
 # Install miniconda
 ENV CONDA_DIR=/opt/conda
-RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-aarch64.sh -O /tmp/miniconda.sh && \
-    sudo /bin/bash /tmp/miniconda.sh -b -p $CONDA_DIR
-
+RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O /tmp/miniconda.sh \
+    && sudo /bin/bash /tmp/miniconda.sh -b -p $CONDA_DIR \
+    && sudo chown $USERNAME:$GROUPNAME -R $CONDA_DIR \
+    && sudo mkdir /home/$USERNAME/conda-env \
+    && sudo mkdir /home/$USERNAME/data \
+    && sudo chown $USERNAME:$GROUPNAME -R /home/$USERNAME/conda-env \
+    && sudo chown $USERNAME:$GROUPNAME -R /home/$USERNAME/data 
 # Put conda in path so we can use conda activate
 ENV PATH=$CONDA_DIR/bin:$PATH
 
 # Config
-# COPY --chown=$USERNAME:$GROUPNAME conda-dev/hello-spark.yml /home/$USERNAME/conda-dev
-# COPY --chown=$USERNAME:$GROUPNAME data/* /home/$USERNAME/data
-# RUN conda env create -f /home/$USERNAME/conda-dev/hello-spark.yml \
+COPY --chown=$USERNAME:$GROUPNAME conda-env/hello-spark.yml /home/$USERNAME/conda-env/
+COPY --chown=$USERNAME:$GROUPNAME data/* /home/$USERNAME/data/
+# RUN conda env create -f /home/$USERNAME/conda-env/hello-spark.yml \
 #     && conda activate hello-spark
 
 WORKDIR /home/$USERNAME
-# CMD [ "tail", "-f", "/dev/null" ]

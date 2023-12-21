@@ -11,3 +11,5 @@ dependencies:
   - py4j
   - pyspark
   - pytz
+  - dagster
+  - dagster-webserver

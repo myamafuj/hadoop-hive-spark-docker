@@ -161,7 +161,7 @@ services:
       SPARK_LOCAL_IP: 172.28.0.7
       SPARK_LOCAL_HOSTNAME: dev
     volumes:
-      - ./dev/home:/home/jupyter
+      - ~/Documents/Docker-Volumns/hadoop-dev:/home/
     networks:
       sparknet:
         ipv4_address: 172.28.0.7
