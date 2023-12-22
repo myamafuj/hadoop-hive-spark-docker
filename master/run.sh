@@ -17,9 +17,10 @@ yarn --daemon start resourcemanager
 if [ ! -f "$NAMEDIR"/initialized ]; then
   echo "Configuring Hive..."
   hdfs dfs -mkdir -p  /user/hive/warehouse
-  schematool -dbType postgres -initSchema
+  # schematool -dbType postgres -initSchema
   touch "$NAMEDIR"/initialized
 fi
+schematool -dbType postgres -initSchema
 
 echo "Starting Hive Metastore..."
 hive --service metastore &

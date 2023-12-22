@@ -40,6 +40,7 @@
         <name>hive.metastore.schema.verification</name>
         <value>false</value>
     </property>
+    
     <!-- <property>
         <name>hive.server2.thrift.port</name>
         <value>10000</value>

@@ -41,10 +41,26 @@ conda env create --file ~/conda-env/hello-spark.yml
 # create the mysql container and attach it to sparknet
 docker run --name mysql -dit \
     --network sparknet \
+    --hostname mysql \
     -p 3306:3306 \
     -e MYSQL_ROOT_PASSWORD=root \
     -v ~/Documents/Docker-Volumns/mysql:/var/lib/mysql \
     mysql:latest
 
 docker exec -it mysql mysql -p
+```
+
+```sh
+# create mongodb container and attach it to sparknet
+docker pull mongodb/mongodb-community-server
+
+docker run --name mongo -dit \
+    --network sparknet \
+    --hostname mongodb \
+    -p 27017:27017 \
+    -v ~/Documents/Docker-Volumns/mongo:/data \
+    -w /data \
+    mongodb/mongodb-community-server:latest
+
+docker exec -it mongo mongosh
 ```

@@ -24,6 +24,7 @@ services:
     image: hadoop-hive-spark-master
     container_name: hadoop_master
     hostname: master
+    tty: true
     depends_on:
       - metastore
     environment:
