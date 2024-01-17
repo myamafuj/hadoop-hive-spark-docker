@@ -163,6 +163,7 @@ services:
     container_name: hadoop_dev
     hostname: dev
     tty: true
+    restart: always
     environment:
       SPARK_MASTER_HOST: 172.28.0.2
       SPARK_LOCAL_IP: 172.28.0.7
