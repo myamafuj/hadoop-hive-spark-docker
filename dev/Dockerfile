@@ -1,7 +1,7 @@
 FROM hadoop-hive-spark-base AS base
 FROM tensorflow/tensorflow:latest-gpu
 
-RUN sed -i -e "s|http://archive.ubuntu.com|http://jp.archive.ubuntu.com|g" /etc/apt/sources.list \
+RUN sed -i -e "s|archive.ubuntu.com|mirrors.aliyun.com|g" /etc/apt/sources.list \
  && apt-get -qq update  \
  && DEBIAN_FRONTEND=noninteractive apt-get -qq install --no-install-recommends \
       sudo \
@@ -47,7 +47,7 @@ ENV HIVE_CONF_DIR=$HIVE_HOME/conf
 ENV PATH=$HIVE_HOME/sbin:$HIVE_HOME/bin:$PATH
 
 RUN sudo pip install -U pip &&\
-    sudo pip install --no-cache-dir \
+    sudo pip install -i https://mirrors.aliyun.com/pypi/simple  --no-cache-dir \
     pandas \
     openpyxl \
     findspark \
