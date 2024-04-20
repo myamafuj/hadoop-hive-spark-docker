@@ -1,5 +1,5 @@
 FROM hadoop-hive-spark-base AS base
-FROM tensorflow/tensorflow:latest-gpu-jupyter
+FROM tensorflow/tensorflow:latest-jupyter
 
 RUN sed -i -e "s|archive.ubuntu.com|mirrors.aliyun.com|g" /etc/apt/sources.list \
  && apt-get -qq update  \
