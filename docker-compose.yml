@@ -152,24 +152,6 @@ services:
           devices:
             - capabilities: [gpu]
 
-  dev:
-    image: hadoop-hive-spark-dev
-    hostname: dev
-    environment:
-      SPARK_MASTER_HOST: 172.28.1.2
-      SPARK_LOCAL_IP: 172.28.1.7
-      SPARK_LOCAL_HOSTNAME: dev
-    volumes:
-      - ./dev/home:/home/jupyter
-    networks:
-      sparknet:
-        ipv4_address: 172.28.1.7
-    deploy:
-      resources:
-        reservations:
-          devices:
-            - capabilities: [gpu]
-
 volumes:
   namenode:
   namesecondary:
