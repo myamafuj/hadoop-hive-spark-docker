@@ -1,4 +1,4 @@
-FROM ubuntu:latest
+FROM ubuntu:22.04
 
 RUN sed -i -e "s|http://archive.ubuntu.com|http://jp.archive.ubuntu.com|g" /etc/apt/sources.list \
  && apt-get -qq update  \
@@ -30,7 +30,7 @@ USER $USERNAME
 ENV JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/
 
 # Hadoop
-ARG HADOOP_VERSION=3.4.0
+ARG HADOOP_VERSION=3.4.1
 ARG HADOOP_URL=https://www.apache.org/dist/hadoop/common/hadoop-$HADOOP_VERSION/hadoop-$HADOOP_VERSION.tar.gz
 ENV HADOOP_HOME=/opt/hadoop
 
@@ -51,7 +51,7 @@ ENV PATH=$HADOOP_HOME/sbin:$HADOOP_HOME/bin:$PATH
 ENV LD_LIBRARY_PATH=$HADOOP_HOME/lib/native:$LD_LIBRARY_PATH
 
 # Spark
-ARG SPARK_VERSION=3.5.1
+ARG SPARK_VERSION=3.5.3
 ARG SPARK_URL=https://archive.apache.org/dist/spark/spark-$SPARK_VERSION/spark-$SPARK_VERSION-bin-hadoop3.tgz
 ENV SPARK_HOME=/opt/spark
 
@@ -111,4 +111,4 @@ RUN ln $HADOOP_CONF_DIR/workers $SPARK_CONF_DIR/ \
 # Entry point
 COPY entrypoint.sh /usr/local/sbin/entrypoint.sh
 RUN sudo chmod a+x /usr/local/sbin/entrypoint.sh
-ENTRYPOINT ["entrypoint.sh"]
+# ENTRYPOINT ["entrypoint.sh"]

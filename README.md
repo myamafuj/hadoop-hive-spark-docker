@@ -1,17 +1,20 @@
 # Hadoop-Hive-Spark cluster + Jupyter on Docker
 
+## Caution
+Do not use in a production environment
+
 ## Software
 
-* [Hadoop 3.3.4](https://hadoop.apache.org/)
+* [Hadoop 3.4.1](https://hadoop.apache.org/)
 
 * [Hive 3.1.3](http://hive.apache.org/)
 
-* [Spark 3.3.1](https://spark.apache.org/)
+* [Spark 3.5.3](https://spark.apache.org/)
 
 ## Quick Start
 
 To deploy the cluster, run:
-```
+```sh
 make
 docker-compose up
 ```

@@ -135,7 +135,8 @@ services:
     ports:
       - "8888:8888"
     volumes:
-      - ./jupyter/notebook:/home/jupyter
+      - ./jupyter/.cache:/home/jupyter/.cache
+      - ./jupyter/notebook:/home/jupyter/notebook
     restart: always
     networks:
       sparknet:
@@ -146,6 +147,10 @@ services:
       - "worker1:172.28.1.3"
       - "worker2:172.28.1.4"
       - "history:172.28.1.5"
+    ipc: host
+    ulimits:
+       memlock: -1
+       stack: -1
     deploy:
       resources:
         reservations:
