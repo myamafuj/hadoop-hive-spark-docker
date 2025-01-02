@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/bash
 
 echo "Starting Hadoop data node..."
 hdfs --daemon start datanode

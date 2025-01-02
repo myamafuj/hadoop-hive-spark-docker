@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/bash
 
 if [ -z "$(ls -A "$NAMEDIR")" ]; then
   echo "Formatting namenode name directory: $NAMEDIR"
