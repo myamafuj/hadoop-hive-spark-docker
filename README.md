@@ -2,8 +2,9 @@
 
 ## Prerequisites
 
-- Docker Desktop
-    Docker Desktop is the easiest way to get started with Docker on Windows. It includes both Docker and Docker Compose, and works seamlessly with Windows Subsystem for Linux (WSL 2).
+1-Docker Desktop
+    
+Docker Desktop is the easiest way to get started with Docker on Windows. It includes both Docker and Docker Compose, and works seamlessly with Windows Subsystem for Linux (WSL 2).
 
 - Step 1: Enable WSL 2 (If Not Already Enabled)
 Docker Desktop requires WSL 2 (Windows Subsystem for Linux version 2) for optimal performance. If WSL 2 isn’t enabled on your system, follow these steps to set it up:
