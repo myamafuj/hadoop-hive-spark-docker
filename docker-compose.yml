@@ -9,7 +9,7 @@ services:
     volumes:
       - metastore:/var/lib/postgresql/data
       - ./metastore/ddl/init.sql:/docker-entrypoint-initdb.d/init.sql
-    restart: always
+    #restart: always
     networks:
       sparknet:
         ipv4_address: 172.28.1.1
@@ -37,7 +37,8 @@ services:
       - "10000:10000"
     volumes:
       - namenode:/opt/hadoop/dfs/name
-    restart: always
+      - ./master/jobs:/opt/spark/jobs
+    #restart: always
     networks:
       sparknet:
         ipv4_address: 172.28.1.2
@@ -62,7 +63,7 @@ services:
       - "9864:9864"
     volumes:
       - datanode1:/opt/hadoop/dfs/data
-    restart: always
+    #restart: always
     networks:
       sparknet:
         ipv4_address: 172.28.1.3
@@ -87,7 +88,7 @@ services:
       - "9865:9864"
     volumes:
       - datanode2:/opt/hadoop/dfs/data
-    restart: always
+    #restart: always
     networks:
       sparknet:
         ipv4_address: 172.28.1.4
@@ -111,7 +112,7 @@ services:
     ports:
       - "18080:18080"
       - "19888:19888"
-    restart: always
+    #restart: always
     networks:
       sparknet:
         ipv4_address: 172.28.1.5
@@ -120,42 +121,6 @@ services:
       - "master:172.28.1.2"
       - "worker1:172.28.1.3"
       - "worker2:172.28.1.4"
-
-  jupyter:
-    image: hadoop-hive-spark-jupyter
-    hostname: jupyter
-    environment:
-      SPARK_MASTER_HOST: 172.28.1.2
-      SPARK_LOCAL_IP: 172.28.1.6
-      SPARK_LOCAL_HOSTNAME: jupyter
-    depends_on:
-      - master
-      - worker1
-      - worker2
-    ports:
-      - "8888:8888"
-    volumes:
-      - ./jupyter/.cache:/home/jupyter/.cache
-      - ./jupyter/notebook:/home/jupyter/notebook
-    restart: always
-    networks:
-      sparknet:
-        ipv4_address: 172.28.1.6
-    extra_hosts:
-      - "metastore:172.28.1.1"
-      - "master:172.28.1.2"
-      - "worker1:172.28.1.3"
-      - "worker2:172.28.1.4"
-      - "history:172.28.1.5"
-    ipc: host
-    ulimits:
-       memlock: -1
-       stack: -1
-    deploy:
-      resources:
-        reservations:
-          devices:
-            - capabilities: [gpu]
 
 volumes:
   namenode:

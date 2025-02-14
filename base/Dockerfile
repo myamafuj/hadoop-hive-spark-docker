@@ -4,7 +4,7 @@ RUN sed -i -e "s|http://archive.ubuntu.com|http://jp.archive.ubuntu.com|g" /etc/
  && apt-get -qq update  \
  && DEBIAN_FRONTEND=noninteractive apt-get -qq install --no-install-recommends \
       sudo \
-      openjdk-8-jdk \
+      openjdk-11-jdk \
       curl \
       gnupg \
       procps \
@@ -27,7 +27,7 @@ RUN echo $USERNAME ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/$USERNAME \
 
 USER $USERNAME
 
-ENV JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/
+ENV JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64/
 
 # Hadoop
 ARG HADOOP_VERSION=3.3.6
@@ -108,6 +108,7 @@ COPY --chown=$USERNAME:$GROUPNAME conf/hive-site.xml $HIVE_CONF_DIR/
 RUN ln $HADOOP_CONF_DIR/workers $SPARK_CONF_DIR/ \
  && ln $HIVE_CONF_DIR/hive-site.xml $SPARK_CONF_DIR/
 
+RUN sudo pip install --no-cache-dir findspark
 # Entry point
 COPY entrypoint.sh /usr/local/sbin/entrypoint.sh
 RUN sudo chmod a+x /usr/local/sbin/entrypoint.sh
