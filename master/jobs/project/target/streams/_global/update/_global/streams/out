@@ -1,0 +1,7 @@
+[0m[[0m[0mdebug[0m] [0m[0mnot up to date. inChanged = true, force = false[0m
+[0m[[0m[0mdebug[0m] [0m[0mUpdating ProjectRef(uri("file:/C:/Users/m00878602/Desktop/HADOOP/hadoop-hive-spark-docker/master/jobs/project/"), "jobs-build")...[0m
+[0m[[0m[0minfo[0m] [0m[0mUpdating jobs-build[0m
+[0m[[0m[0minfo[0m] [0m[0mResolved jobs-build dependencies[0m
+[0m[[0m[0minfo[0m] [0m[0mFetching artifacts of jobs-build[0m
+[0m[[0m[0minfo[0m] [0m[0mFetched artifacts of jobs-build[0m
+[0m[[0m[0mdebug[0m] [0m[0mDone updating ProjectRef(uri("file:/C:/Users/m00878602/Desktop/HADOOP/hadoop-hive-spark-docker/master/jobs/project/"), "jobs-build")[0m

@@ -1,0 +1,6 @@
+[0m[[0m[31merror[0m] [0m[0mC:\Users\m00878602\Desktop\HADOOP\hadoop-hive-spark-docker\master\jobs\wordcount.scala:5:22: encountered unrecoverable cycle resolving import.[0m
+[0m[[0m[31merror[0m] [0m[0mNote: this is often due in part to a class depending on a definition nested within its companion.[0m
+[0m[[0m[31merror[0m] [0m[0mIf applicable, you may wish to try moving some members into another object.[0m
+[0m[[0m[31merror[0m] [0m[0m        import spark.implicits._[0m
+[0m[[0m[31merror[0m] [0m[0m                     ^[0m
+[0m[[0m[31merror[0m] [0m[0mone error found[0m

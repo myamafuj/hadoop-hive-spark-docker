@@ -1,0 +1,7 @@
+[0m[[0m[0mdebug[0m] [0m[0mPackaging C:\Users\m00878602\Desktop\HADOOP\hadoop-hive-spark-docker\master\jobs\target\scala-2.12\word-count_2.12-0.1.jar ...[0m
+[0m[[0m[0mdebug[0m] [0m[0mInput file mappings:[0m
+[0m[[0m[0mdebug[0m] [0m[0m	WordCount$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  C:\Users\m00878602\Desktop\HADOOP\hadoop-hive-spark-docker\master\jobs\target\scala-2.12\classes\WordCount$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	WordCount.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  C:\Users\m00878602\Desktop\HADOOP\hadoop-hive-spark-docker\master\jobs\target\scala-2.12\classes\WordCount.class[0m
+[0m[[0m[0mdebug[0m] [0m[0mDone packaging.[0m
